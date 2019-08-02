@@ -1,1 +1,1 @@
-worker: ppython IDMA.py
+worker: python IDMA.py
