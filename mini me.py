@@ -2,14 +2,21 @@ import discord
 from discord.ext import commands, tasks
 from itertools import cycle
 import random
+
+
 def read_token():
     with open("./config/token.txt", "r") as f:
         lines = f.readlines()
         return lines[0].strip()
 token = read_token()
 
+initial_extensions = ['cogs.jokes',
+                      'cogs.mod',
+                      'cogs.admin']
+
 bot = commands.Bot(command_prefix='-')
 status = cycle(['Firefly', 'D&D', 'Monopoly', 'Stranger Things', 'Star Wars', 'Zelda', 'Pacman', 'Motral Kombat', 'Life', 'with my emotions', 'with myself', 'Nothing', "I'm bored"])
+
 @tasks.loop(seconds=60)
 async def change_status():
     await bot.change_presence(activity=discord.Game(next(status)))
@@ -23,7 +30,7 @@ async def on_ready():
 
 @bot.command(aliases=['8ball'])
 async def _8ball(ctx, *, question):
-    ''': Ask a question and I shall shake my magic 8 ball for you!'''
+    """: Ask a question and I shall shake my magic 8 ball for you!'''"""
     responses = ['It is certain.',
                  'It is decidedly so.',
                  'Without a doubt.',
